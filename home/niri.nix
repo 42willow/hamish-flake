@@ -23,5 +23,30 @@
       "Mod+K".action = focus-window-up;
       "Mod+L".action = focus-column-right;
     };
+
+    outputs = {
+      "DP-2" = {
+        mode = {
+          width = 1920;
+          height = 1080;
+        };
+        position = {
+          x = 0;
+          y = 0;
+        };
+        scale = 1.0;
+      };
+      "DP-1" = {
+        mode = {
+          width = 2560;
+          height = 1440;
+        };
+        position = {
+          x = 1920;
+          y = 0;
+        };
+        scale = 1.0;
+      };
+    };
   };
 }

@@ -7,14 +7,18 @@
     animations.enable = true;
 
     binds = with config.lib.niri.actions; {
-      "Mod+Q".action.quit = [];
-      "Mod+Return".action.spawn = lib.getExe config.programs.alacritty.package;
-      "Mod+P".action.spawn = lib.getExe config.programs.fuzzel.package;
+      "Mod+Q" = { repeat = false; action = close-window; };
+      "Mod+Return" = { action.spawn = "alacritty"; };
+      "Mod+P" = { action.spawn = "fuzzel"; };
 
-      "Mod+N".action.focus-column-or-monitor-left = [];
-      "Mod+E".action.focus-window-or-workspace-down = [];
-      "Mod+I".action.focus-window-or-workspace-up = [];
-      "Mod+O".action.focus-column-or-monitor-right = [];
+      "Mod+Left".action  = focus-column-left;
+      "Mod+Down".action  = focus-window-down;
+      "Mod+Up".action    = focus-window-up;
+      "Mod+Right".action = focus-column-right;
+      "Mod+H".action     = focus-column-left;
+      "Mod+J".action     = focus-window-down;
+      "Mod+K".action     = focus-window-up;
+      "Mod+L".action     = focus-column-right;
     };
   };
 }

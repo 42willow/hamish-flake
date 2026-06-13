@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
+{pkgs, ...}: {
+  imports = [
+    ./niri.nix
+  ];
 
-{
   home.username = "hamish";
   home.homeDirectory = "/home/hamish";
 

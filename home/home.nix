@@ -1,11 +1,38 @@
-{pkgs, ...}: {
+{inputs, pkgs, ...}: {
   imports = [
     ./niri.nix
+    inputs.zen-browser.homeModules.default
   ];
 
   home.username = "hamish";
   home.homeDirectory = "/home/hamish";
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    name = "breeze_cursors";
+    package = pkgs.kdePackages.breeze;
+    size = 24;
+  };
+
+  # 1. Force the dark color-scheme for GNOME/GTK apps (including libadwaita/GTK4)
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
+  # 2. Qt applications will read the GTK theme or can be styled via environment
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "qt5ct"; # Or "gnome"
+  };
+
+  # 3. Ensure XDG Desktop Portals are configured (required for Niri)
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+  
   # Packages
   home.packages = with pkgs; [
     alacritty
@@ -28,7 +55,14 @@
     settings = {
       font = {
         normal.family = "Maple Mono NF";
-        size = 13.0;
+        size = 12.0;
+      };
+
+      window = {
+        padding = {
+          x = 12;
+          y = 12;
+        };
       };
     };
   };
@@ -53,6 +87,10 @@
 
   # Firefox
   programs.firefox = {
+    enable = true;
+  };
+
+  programs.zen-browser = {
     enable = true;
   };
 

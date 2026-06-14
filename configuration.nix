@@ -75,6 +75,21 @@
     curl
   ];
 
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-color-emoji
+    ];
+
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        sansSerif = [ "Noto Sans" ];
+      };
+    };
+  };
+  
+
   # Nix settings
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;

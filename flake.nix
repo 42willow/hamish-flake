@@ -32,11 +32,11 @@
     home-manager,
     ...
   } @ inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.archie = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {inherit self inputs;};
       modules = [
-        ./configuration.nix
+        ./hosts/archie
         home-manager.nixosModules.home-manager
       ];
     };

@@ -1,11 +1,12 @@
 {
+  self,
+  inputs,
   config,
   pkgs,
-  inputs,
   ...
 }: {
   imports = [
-    ./home
+    "${self}/modules/home"
     ./hardware-configuration.nix
     inputs.niri.nixosModules.niri
   ];
@@ -20,7 +21,7 @@
 
   # Networking
   networking = {
-    hostName = "nixos";
+    hostName = "archie";
     networkmanager.enable = true;
     firewall.allowedTCPPorts = [80 443 8080 9999];
     useDHCP = false;
@@ -104,18 +105,6 @@
       enable = true;
       defaultFonts = {
         sansSerif = ["Noto Sans"];
-      };
-    };
-  };
-
-  stylix = {
-    enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-    polarity = "dark";
-    fonts = {
-      monospace = {
-        package = pkgs.maple-mono.Normal-NF;
-        name = "Maple Mono NF";
       };
     };
   };

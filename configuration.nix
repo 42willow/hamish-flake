@@ -13,26 +13,28 @@
   services.gnome.gnome-keyring.enable = true;
 
   # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   # Networking
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-  networking.firewall.allowedTCPPorts = [ 80 443 8080 9999 ];
-
   networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    firewall.allowedTCPPorts = [80 443 8080 9999];
     useDHCP = false;
-
     interfaces.enp42s0 = {
-      ipv4.addresses = [{
-        address = "192.168.68.222";
-        prefixLength = 24;
-      }];
+      ipv4.addresses = [
+        {
+          address = "192.168.68.222";
+          prefixLength = 24;
+        }
+      ];
     };
 
     defaultGateway = "192.168.68.1";
-    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+    nameservers = ["1.1.1.1" "8.8.8.8"];
   };
 
   # Locale
@@ -101,7 +103,7 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        sansSerif = [ "Noto Sans" ];
+        sansSerif = ["Noto Sans"];
       };
     };
   };
@@ -114,7 +116,7 @@
       monospace = {
         package = pkgs.maple-mono.Normal-NF;
         name = "Maple Mono NF";
-      };er
+      };
     };
   };
 

@@ -1,22 +1,33 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
+    ./alacritty.nix
+    ./stylix.nix
     ./niri.nix
-    inputs.zen-browser.homeModules.default
+    ./zen-browser.nix
+    ./zsh.nix
   ];
 
-  home.username = "hamish";
-  home.homeDirectory = "/home/hamish";
+  home = {
+    username = "hamish";
+    homeDirectory = "/home/hamish";
 
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    name = "breeze_cursors";
-    package = pkgs.kdePackages.breeze;
-    size = 24;
+    pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+      name = "breeze_cursors";
+      package = pkgs.kdePackages.breeze;
+      size = 24;
+    };
+
+    packages = with pkgs; [
+      alacritty
+      kdePackages.ark
+      kdePackages.dolphin
+      maple-mono.Normal-NF
+      proton-vpn
+      qbittorrent
+      zed-editor
+    ];
   };
 
   dconf.settings = {
@@ -25,70 +36,16 @@
     };
   };
 
-  # Packages
-  home.packages = with pkgs; [
-    alacritty
-    maple-mono.Normal-NF
-    kdePackages.dolphin
-    kdePackages.ark
-    qbittorrent
-    proton-vpn
-    zed-editor
-  ];
-
   # Fonts
   fonts.fontconfig.enable = true;
 
-  # Zsh
-  programs.zsh = {
-    enable = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-  };
-
-  # Alacritty
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      window.padding = {
-        x = 12;
-        y = 12;
-      };
-    };
-  };
-
-  # Helix
-  programs.helix = {
-    enable = true;
-  };
-
-  # GitHub CLI
-  programs.gh = {
-    enable = true;
-  };
-
-  # VS Code
-  programs.vscode = {
-    enable = true;
-  };
-
-  programs.zen-browser = {
-    enable = true;
-  };
-
-  stylix.targets.zen-browser.enable = false;
-
-  # Fuzzel
-  programs.fuzzel = {
-    enable = true;
-  };
-
-  programs.waybar = {
-    enable = true;
-  };
-
-  programs.distrobox = {
-    enable = true;
+  programs = {
+    distrobox.enable = true;
+    fuzzel.enable = true;
+    gh.enable = true;
+    helix.enable = true;
+    vscode.enable = true;
+    waybar.enable = true;
   };
 
   home.stateVersion = "26.05";

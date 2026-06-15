@@ -29,7 +29,6 @@
   outputs = {
     self,
     nixpkgs,
-    stylix,
     home-manager,
     ...
   } @ inputs: {
@@ -39,7 +38,6 @@
       modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager
-        stylix.nixosModules.stylix
       ];
     };
   };
